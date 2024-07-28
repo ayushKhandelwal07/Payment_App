@@ -48,7 +48,7 @@ const signupBody = zod.object({
       try{
             const account = await Account.create({
                   userId ,
-                  balance : (1 + Math.random() * 10000)
+                  balance :  Math.floor(1 + Math.random() * 10000)
             })
             console.log(account)
 
@@ -153,9 +153,9 @@ router.get("/bulk" ,async (req,res) => {
       })
       res.json({
             users : users.map(user =>({
-                  username : user.firstName,
-                  lastname : user.lastname,
+                  username : user.username,
                   firstname : user.firstname,
+                  lastname : user.lastname,
                   _id : user._id
             }))
       })

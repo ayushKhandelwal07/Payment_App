@@ -6,14 +6,16 @@ const authMiddleware = require("../middlewares");
 const router = express.Router();
 
 //****************router for getting user account balance ************************************** 
-router.get('/balance',authMiddleware ,async (req,res) => {
+router.get("/balance", authMiddleware, async (req, res) => {
       const account = await Account.findOne({
-            userId : req.userId
-      })
+          userId: req.userId
+      });
+      console.log(account);
+  
       res.json({
-            Balance : account.balance
+          balance: account.balance
       })
-})
+  });
 
 
 //********************* rouer for transation ***************************************** */
@@ -42,6 +44,7 @@ router.post("/transfer",authMiddleware , async (req,res) => {
 
       await session.commitTransaction();
 
+      
       res.json({ message : "Transcation completed"});
 })
 
